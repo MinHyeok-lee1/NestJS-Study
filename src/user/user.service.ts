@@ -115,16 +115,12 @@ export class UserService {
   }
 
   async getAll(): Promise<User> {
-    // .exec()
-    // return await this.model
-    //   .findOne({ _id: '63fd6d2b5702c1bfcd8ab20d' })
-    //   .catch();
-
     try {
       await this.model.findOne({ _id: 'zz' });
     } catch (err) {
       console.log('@@@@', err.message);
     }
+
     return await this.model.findOne({ _id: 'zz' }).catch();
   }
 
