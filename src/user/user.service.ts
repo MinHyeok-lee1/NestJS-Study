@@ -83,36 +83,49 @@ export class UserService {
 
   async userPagenation(): Promise<User[]> {
     let page1: User[], page2: User[], page3: User[];
-    try {
-      page1 = await this.model.find().limit(2);
-    } catch (err: unknown) {
-      console.log(err);
-    }
-    try {
-      page2 = await this.model.find().skip(2).limit(2);
-    } catch (err: unknown) {
-      console.log(err);
-    }
-
+    // try {
+    //   page1 = await this.model.find().limit(2);
+    // } catch (err: unknown) {
+    //   console.log(err);
+    // }
+    // try {
+    //   page2 = await this.model.find().skip(2).limit(2);
+    // } catch (err: unknown) {
+    //   console.log(err);
+    // }
+    page1 = await this.model.find().limit(2);
+    page2 = await this.model.find().skip(2).limit(2);
     let latest = null;
     const cursor = this.model.collection.find().limit(2);
     while (await cursor.hasNext()) {
       latest = await cursor.next();
     }
 
-    try {
-      page3 = await this.model
-        .find({ createdAt: { $gt: latest.createdAt } })
-        .limit(2);
-    } catch (err: unknown) {
-      console.log(err);
-    }
-
+    // try {
+    //   page3 = await this.model
+    //     .find({ createdAt: { $gt: latest.createdAt } })
+    //     .limit(2);
+    // } catch (err: unknown) {
+    //   console.log(err);
+    // }
+    page3 = await this.model
+      .find({ createdAt: { $gt: latest.createdAt } })
+      .limit(2);
     return page3;
   }
 
-  async getAll(): Promise<User[]> {
-    return await this.model.find({}).exec();
+  async getAll(): Promise<User> {
+    // .exec()
+    // return await this.model
+    //   .findOne({ _id: '63fd6d2b5702c1bfcd8ab20d' })
+    //   .catch();
+
+    try {
+      await this.model.findOne({ _id: 'zz' });
+    } catch (err) {
+      console.log('@@@@', err.message);
+    }
+    return await this.model.findOne({ _id: 'zz' }).catch();
   }
 
   async deleteAll(): Promise<DeleteResult> {

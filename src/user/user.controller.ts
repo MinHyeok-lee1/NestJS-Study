@@ -74,9 +74,18 @@ export class UserController {
     summary: `  차량 정보 전체 반환`,
   })
   @ApiResponse({ description: '모든 차량 리스트' })
-  async findAllCars(): Promise<User[]> {
+  async findAllCars(): Promise<User> {
     return await this.userService.getAll();
   }
+
+  // @Get('all')
+  // @ApiOperation({
+  //   summary: `  차량 정보 전체 반환`,
+  // })
+  // @ApiResponse({ description: '모든 차량 리스트' })
+  // async findAllCars(): Promise<User> {
+  //   return await this.userService.getAll();
+  // }
 
   @Delete('all')
   @ApiOperation({

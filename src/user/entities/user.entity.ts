@@ -13,6 +13,7 @@ import {
   IsOptional,
   IsEnum,
   IsDateString,
+  IsArray,
 } from 'class-validator';
 
 export enum UserRole {
@@ -46,30 +47,31 @@ export class userBaseInfo {
 export class userStrongInfo {
   @ApiProperty({ type: Number })
   @IsNumber()
-  @IsOptional()
+  @IsDefined()
   level: number;
 
   @ApiProperty({ type: [String] })
-  @IsOptional()
+  @IsArray()
+  @IsDefined()
   skills: string[];
 
   @ApiProperty({ type: Number })
   @IsNumber()
-  @IsOptional()
+  @IsDefined()
   sheildPower: number;
 
   @ApiProperty({ type: Number })
   @IsNumber()
-  @IsOptional()
+  @IsDefined()
   magicPower: number;
 
   @ApiProperty({ type: Number })
   @IsNumber()
-  @IsOptional()
+  @IsDefined()
   swordPower: number;
 }
 
-export class UserInfo extends IntersectionType(userBaseInfo, userStrongInfo) {
+export class UserInfo extends IntersectionType(userStrongInfo, userBaseInfo) {
   @ApiProperty({ type: Date })
   @IsDateString()
   @IsOptional()
