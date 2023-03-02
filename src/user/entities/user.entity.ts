@@ -112,21 +112,21 @@ export class PartialTypeOmitClass extends PartialType(
   test4: number;
 }
 
-// gg
-
-export const UserSchema = new mongoose.Schema({
-  name: String,
-  role: String,
-  age: Number,
-  major: Number,
-  level: Number,
-  skills: Array,
-  sheildPower: Number,
-  magicPower: Number,
-  swordPower: Number,
-
-  createdAt: Date,
-});
+export const UserSchema = new mongoose.Schema(
+  {
+    name: String,
+    role: String,
+    age: Number,
+    major: Number,
+    level: Number,
+    skills: Array,
+    sheildPower: Number,
+    magicPower: Number,
+    swordPower: Number,
+    createdAt: Date,
+  },
+  { strictQuery: 'throw' },
+);
 
 export interface User extends Document {
   readonly userinfo: UserInfo;

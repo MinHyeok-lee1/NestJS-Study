@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { DeleteResult } from 'mongodb';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -114,14 +114,28 @@ export class UserService {
     return page3;
   }
 
-  async getAll(): Promise<User> {
-    try {
-      await this.model.findOne({ _id: 'zz' });
-    } catch (err) {
-      console.log('@@@@', err.message);
-    }
+  async getAll(): Promise<User | User[]> {
+    // try {
+    //   await this.model.findOne({ _id: 'zz' });
+    // } catch (err) {
+    //   console.log('@@@@', err.message);
+    // }
+    // console.log('11', await this.model.find());
+    // console.log('22', await this.model.find().exec());
+    // console.log('33', await this.model.find().then());
 
-    return await this.model.findOne({ _id: 'zz' }).catch();
+    const query = this.model.findOne({
+      name: 'string',
+    });
+    query.find({
+      age: { $gte: '0' },
+    });
+
+    console.log('@@@', query.getFilter());
+    const x = await query.exec();
+    console.log('###', query.getFilter());
+    // if (!x) throw new BadRequestException();
+    return x;
   }
 
   async deleteAll(): Promise<DeleteResult> {

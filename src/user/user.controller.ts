@@ -71,10 +71,10 @@ export class UserController {
 
   @Get('all')
   @ApiOperation({
-    summary: `  차량 정보 전체 반환`,
+    summary: `User 정보 전체 반환`,
   })
   @ApiResponse({ description: '모든 차량 리스트' })
-  async findAllCars(): Promise<User> {
+  async findAllCars(): Promise<User | User[]> {
     return await this.userService.getAll();
   }
 
